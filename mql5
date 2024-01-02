@@ -1,0 +1,144 @@
+mql5
+//+------------------------------------------------------------------+
+//|                                                Sentinex EA.mq5    |
+//|                     Copyright 2022, Forex Robot Easy Team         |
+//|                                      http://www.forexroboteasy.com|
+//+------------------------------------------------------------------+
+
+// Global variables
+double LotSize = 0.01; // Default lot size
+int GridSize = 20; // Grid size
+
+//+------------------------------------------------------------------+
+//| Expert initialization function                                   |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+   // Initialize necessary components and settings
+   Print('Sentinex EA initialized successfully');
+   
+   return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Expert deinitialization function                                 |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+   // Perform necessary cleanup tasks
+   Print('Sentinex EA deinitialized successfully');
+}
+
+//+------------------------------------------------------------------+
+//| Expert tick function                                             |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+   // Implement grid-based approach for currency trading
+   GridTrading();
+   
+   // Perform other trading operations and risk management
+   // ...
+}
+
+//+------------------------------------------------------------------+
+//| Grid Trading function                                            |
+//+------------------------------------------------------------------+
+void GridTrading()
+{
+   // Get the current market conditions
+   double currentPrice = SymbolInfoDouble(_Symbol, SYMBOL_BID);
+   double previousPrice = SymbolInfoDouble(_Symbol, SYMBOL_CLOSE, 1);
+   
+   // Check if the market is trending or ranging
+   bool isTrending = IsTrendingMarket(currentPrice, previousPrice);
+   
+   // Implement unique grid strategy based on market conditions
+   if (isTrending)
+   {
+      // Execute trend-based trading strategy
+      // ...
+   }
+   else
+   {
+      // Execute range-based trading strategy
+      // ...
+   }
+   
+   // Adjust grid size and lot size based on market conditions
+   if (isTrending)
+   {
+      GridSize = 10;
+      LotSize = 0.02;
+   }
+   else
+   {
+      GridSize = 30;
+      LotSize = 0.01;
+   }
+   
+   // Manage risk and maximize profit potentials
+   ManageRisk();
+   
+   // Update trading preferences, risk parameters, and performance targets
+   UpdatePreferences();
+}
+
+//+------------------------------------------------------------------+
+//| Check if the market is trending or ranging                        |
+//+------------------------------------------------------------------+
+bool IsTrendingMarket(const double currentPrice, const double previousPrice)
+{
+   // Determine if the market is trending based on price movement
+   double priceDifference = currentPrice - previousPrice;
+   
+   if (MathAbs(priceDifference) > 0.0001)
+      return true; // Market is trending
+   else
+      return false; // Market is ranging
+}
+
+//+------------------------------------------------------------------+
+//| Manage risk and maximize profit potentials                        |
+//+------------------------------------------------------------------+
+void ManageRisk()
+{
+   // Implement advanced risk management features
+   // ...
+}
+
+//+------------------------------------------------------------------+
+//| Update trading preferences, risk parameters, and performance targets|
+//+------------------------------------------------------------------+
+void UpdatePreferences()
+{
+   // Update user-defined preferences
+   // ...
+}
+
+//+------------------------------------------------------------------+
+//| Expert testing function                                          |
+//+------------------------------------------------------------------+
+void OnTester()
+{
+   // Perform necessary testing procedures
+   // ...
+}
+
+//+------------------------------------------------------------------+
+//| Program entry point                                               |
+//+------------------------------------------------------------------+
+void OnStart()
+{
+   // Start the trading robot
+   OnTick();
+}
+
+//+------------------------------------------------------------------+
+//| Program logical conclusion                                        |
+//+------------------------------------------------------------------+
+void OnStop()
+{
+   // Perform necessary cleanup tasks and stop the trading robot
+   Print('Sentinex EA stopped');
+}
